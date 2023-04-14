@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { useDestinationVendors } from '@prequel/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const destinationVendors = useDestinationVendors()  
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -41,6 +44,15 @@ export default function Home() {
           priority
         />
       </div>
+
+      <h2>PREQUEL TEST</h2>
+      {(destinationVendors.destinations || []).map((destination) => (
+            <div key={destination.display_name}>
+              <h3>{destination.docs}</h3>
+              <p>{destination.vendor_name}</p>
+            </div>
+          ))}
+
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
